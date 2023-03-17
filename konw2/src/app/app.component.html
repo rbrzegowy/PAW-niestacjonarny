@@ -1,0 +1,12 @@
+<h1>Hello world</h1>
+<p>Title: {{ title }}</p>
+<p>Descr: {{ description }}</p>
+<input type="text" [placeholder]="questionFieldPlaceholder">
+<p>Last action: {{ lastAction }}</p>
+
+<app-card [title]="userCardTitle" [content]="userCardContent" (okAction)="onOk($event)"
+  (cancelAction)="onCancel($event)"></app-card>
+<app-card [title]="cartCardTitle" [content]="cartCardContent" (okAction)="onOk($event)"
+  (cancelAction)="onCancel($event)"></app-card>
+
+<app-user title="Krzysio" (okClicked)="onUserOk($event)"></app-user>
