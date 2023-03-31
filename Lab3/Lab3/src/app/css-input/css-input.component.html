@@ -1,0 +1,11 @@
+<h2>Właściwości CSS</h2>
+<div>Kolor: <input type="text" [(ngModel)]="css.color"></div>
+<div><button (click)="onGenerateCSS()">Wygeneruj CSS</button></
+div>
+<h2>Komponenty</h2>
+<div>
+  <button
+    [style.color]="css.color"
+    [style.background]="background"
+  >Some button</button>
+</div>
