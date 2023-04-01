@@ -6,4 +6,6 @@ Utwórz aplikację która:
 1. Ostyluje w/w znaczniki stylami wpisanymi przez użytkownika
 1. Wygeneruje i wyświetli style CSS z wartości przekazanych przez użytkownika 
 
+Przykładowy mock w pliku [przykladowy-mock.png](./przykladowy-mock.png)
+
 Wykorzystaj dyrektywę ngModel, oraz stylowanie za pomocą dyrektywy style.nazwaStylu 
