@@ -1,0 +1,14 @@
+<h1>Stylowanie</h1>
+
+<button [class.active]="buttonState.active" [class.primary]="+size.value>30">Pojemnik na klasy</button>
+<!-- <button [ngClass]="buttonNgClasses">Pojemnik na klasy</button> -->
+<!-- <button [ngClass]="{stat1: true, stat2: true, active: buttonState.active}">Pojemnik na klasy</button> -->
+<button [style.fontSize.px]="size.value" [style.color]="'red'">Pojemnik na klasy</button>
+<!-- <button [ngStyle]="{'fontSize.px': size.value, color: 'red'}">Pojemnik na klasy</button> -->
+
+<p>Kolor tła: <input #bgColor type="text" (input)="onBackgroundChange(bgColor.value)"></p>
+<p>Podaj font-size: <input #size type="text" (input)="onInputChange(size.value)"></p>
+<p [ngStyle]="{'font-size.px': size.value}" [class]="{selected: itemSelected}">Tekst renderowany wielkością czionki
+    {{fontSize}}px</p>
+<p><button mat-button (click)="itemToggle()">Zmień klasę CSS</button></p>
+<p [style.fontSize.px]="fontSize" [class]="{selected: itemSelected}">Test - dynamiczna klasa CSSS</p>

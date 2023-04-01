@@ -1,0 +1,21 @@
+:host {
+    transition: 1s all ease-in-out;
+    display: block;
+    padding: 20px;
+}
+
+.highlighted {
+    // do some highlight
+}
+
+div {
+    transition: 0.5s all ease-in-out;
+}
+
+.selected {
+    background: lightblue;
+}
+
+p {
+    margin: 20px;
+}

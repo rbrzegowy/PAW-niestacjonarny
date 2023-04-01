@@ -1,0 +1,29 @@
+<h1>Dyrektywy</h1>
+
+
+<button (click)="onUsersListToggle()">Pokaż postacie (tylko o długości nazwy > 4)</button>
+<ul *ngIf="showUsers">
+  <ng-container *ngFor="let user of userList">
+    <li *ngIf="user.length>4">{{ user }}</li>
+  </ng-container>
+</ul>
+
+<p><button mat-button (click)="onUsersToggle()">Przełącz formularz</button></p>
+<ng-container [ngSwitch]="listType">
+  <ng-container *ngSwitchCase="'simple'">
+    <ul>
+      <li *ngFor="let item of userList">{{ item }}</li>
+    </ul>
+  </ng-container>
+  <ng-container *ngSwitchCase="'form'">
+    <div *ngFor="let item of userList" class="form-item">
+      <ul>
+        <li>
+          <input type="checkbox" name="" id="">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+  <!-- <div *ngSwitchDefault>output2</div> -->
+</ng-container>

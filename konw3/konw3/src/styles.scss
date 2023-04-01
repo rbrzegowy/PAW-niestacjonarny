@@ -1,0 +1,30 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  // background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+  background-image: linear-gradient(45deg,
+      hsl(84deg 77% 45%) 0%,
+      hsl(127deg 60% 53%) 11%,
+      hsl(156deg 100% 41%) 21%,
+      hsl(168deg 100% 40%) 32%,
+      hsl(180deg 100% 40%) 43%,
+      hsl(189deg 100% 45%) 55%,
+      hsl(195deg 100% 49%) 66%,
+      hsl(198deg 100% 50%) 77%,
+      hsl(202deg 100% 52%) 89%,
+      hsl(223deg 83% 70%) 100%);
+}
+
+.mdc-button {
+  letter-spacing: normal;
+}
+
+.router-link-active {
+  background: #00bcd0 !important;
+  color: #fff !important;
+}

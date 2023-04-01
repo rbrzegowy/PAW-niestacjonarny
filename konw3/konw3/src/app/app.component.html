@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-content>
+    <nav>
+      <button mat-stroked-button color="basic" [routerLink]="['style']"
+        routerLinkActive="router-link-active">Stylowanie</button>
+      <button mat-stroked-button color="basic" [routerLink]="['dyrektywy']"
+        routerLinkActive="router-link-active">Dyrektywy</button>
+    </nav>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <router-outlet></router-outlet>
+  </mat-card-content>
+</mat-card>
