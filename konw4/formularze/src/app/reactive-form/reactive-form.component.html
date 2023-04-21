@@ -1,0 +1,39 @@
+<h2>Reactive Forms</h2>
+<h3>Cart</h3>
+<div [formGroup]="cart">
+  <div formGroupName="shipTo">
+    <h4>Ship to:</h4>
+    <div>
+      Name: <input type="text" formControlName="name">
+    </div>
+    <div>
+      City: <input type="text" formControlName="city">
+    </div>
+    <div>Address: <input type="text" formControlName="address"></div>
+    <div>Zip Code: <input type="text" formControlName="zipCode">
+      <span *ngIf="cart.controls.shipTo.controls.zipCode.touched">{{ cart.controls.shipTo.controls.zipCode.errors | json
+        }}</span>
+    </div>
+  </div>
+  <div>
+    <h4>Items</h4>
+    <button (click)="onAddItem()">Add item</button>
+    <div *ngFor="let item of cart.controls.items.controls" style="display: flex;">
+      <div>
+        Name: <input type="text" [formControl]="item.controls.name">
+      </div>
+      <div>
+        Quantity: <input type="text" [formControl]="item.controls.quantity">
+      </div>
+      <div>
+        Price: <input type="text" [formControl]="item.controls.price">
+      </div>
+      <div>
+        Value: {{ (item.controls.price.value ?? 0) * (item.controls.quantity.value ?? 0)}}
+      </div>
+    </div>
+  </div>
+  <div>
+    Cart value: <input type="text" formControlName="cartValue">
+  </div>
+</div>
