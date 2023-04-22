@@ -1,0 +1,38 @@
+.invoice-header {
+  display: flex;
+  gap: 30px;
+}
+
+mat-card {
+  margin: 20px;
+}
+
+mat-card-header {
+  padding-bottom: 16px;
+}
+
+.basic-data {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.issuer {
+  display: flex;
+  flex-direction: column;
+  min-width: 450px;
+}
+
+.recipient {
+  display: flex;
+  flex-direction: column;
+  min-width: 450px;
+}
+
+.invoice-summary {
+  width: 300px;
+}
+
+.value {
+  font-weight: bold;
+}

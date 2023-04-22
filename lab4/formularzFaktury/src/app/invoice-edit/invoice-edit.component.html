@@ -1,0 +1,179 @@
+<mat-card>
+  <mat-card-content>
+    <h2>Faktura</h2>
+  </mat-card-content>
+</mat-card>
+<ng-container [formGroup]="invoiceForm">
+  <div class="invoice-header">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Dane faktury</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="basic-data">
+        <mat-form-field>
+          <input matInput placeholder="Numer" formControlName="number">
+        </mat-form-field>
+        <ng-container [ngTemplateOutlet]="datePicker"
+          [ngTemplateOutletContext]="{label:'Data utworzenia', formControl: invoiceForm.get('createdDate')}">
+        </ng-container>
+        <ng-container [ngTemplateOutlet]="datePicker"
+          [ngTemplateOutletContext]="{label:'Data sprzedaży', formControl: invoiceForm.get('saleDate')}">
+        </ng-container>
+        <ng-container [ngTemplateOutlet]="datePicker"
+          [ngTemplateOutletContext]="{label:'Termin płatności', formControl: invoiceForm.get('paymentDate')}">
+        </ng-container>
+        <mat-form-field>
+          <mat-select placeholder="Metoda płatności" formControlName="paymentMethod">
+            <mat-option *ngFor="let item of paymentMethods | keyvalue" [value]="item.key">
+              {{item.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Wystawca</mat-card-title>
+      </mat-card-header>
+      <mat-card-content formGroupName="issuer" class="issuer">
+        <mat-form-field>
+          <input matInput placeholder="Nazwa" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Adres" formControlName="address">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Miejscowość" formControlName="city">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Kod pocztowy" formControlName="zipCode">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Nip" formControlName="vatNumber">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Nr konta" formControlName="accountNumber">
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Odbiorca</mat-card-title>
+      </mat-card-header>
+      <mat-card-content formGroupName="recipient" class="recipient">
+        <mat-form-field>
+          <input matInput placeholder="Nazwa" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Adres" formControlName="address">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Miejscowość" formControlName="city">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Kod pocztowy" formControlName="zipCode">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Nip" formControlName="vatNumber">
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Pozycje</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table>
+        <tr *ngIf="invoiceForm.controls.items.length > 0" class="header">
+          <td>Nazwa</td>
+          <td>Jednostka miary</td>
+          <td>Ilość</td>
+          <td>Cena netto</td>
+          <td>Stawka Vat</td>
+          <td>Wartość netto</td>
+          <td>Wartość brutto</td>
+          <td></td>
+        </tr>
+        <tr class="item" *ngFor="let item of invoiceForm.controls.items.controls; let idx = index">
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Nazwa" [formControl]="item.controls.name">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="J.m." [formControl]="item.controls.unit">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Ilość" [formControl]="item.controls.quantity"
+                (input)="onQuantityChange(item)">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Cena netto" [formControl]="item.controls.netPrice"
+                (input)="onNetPriceChange(item)">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-select placeholder="Stawka VAT" [formControl]="item.controls.vatRate"
+                (selectionChange)="onVatRateChange(item)">
+                <mat-option *ngFor="let item of vatRates | keyvalue" [value]="item.value">
+                  {{item.key}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Wartość netto" [formControl]="item.controls.netValue"
+                (input)="onNetValueChange(item)">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Wartość brutto" [formControl]="item.controls.grossValue"
+                (input)="onGrossValueChange(item)">
+            </mat-form-field>
+          </td>
+          <td>
+            <button mat-button (click)="onRemoveItem(idx)">usuń</button>
+          </td>
+        </tr>
+      </table>
+      <button mat-raised-button color="primary" (click)="onNewItem()">Dodaj pozycję</button>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="invoice-summary">
+    <mat-card-header>
+      <mat-card-title>Podsumowanie</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        Wartość netto: <span class="value">{{ invoiceValues?.net | currency }}</span>
+      </div>
+      <div>
+        Wartość Vat: <span class="value">{{ invoiceValues?.vat| currency }}</span>
+      </div>
+      <div>
+        Wartość brutto: <span class="value">{{ invoiceValues?.gross| currency }}</span>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>Ok</button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>
+
+<ng-template #datePicker let-label="label" let-formControl='formControl'>
+  <mat-form-field appearance="fill">
+    <mat-label>{{label}}</mat-label>
+    <input matInput [matDatepicker]="picker" [formControl]="formControl">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</ng-template>
