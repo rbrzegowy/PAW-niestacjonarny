@@ -1,7 +1,7 @@
 # Lab4 - Reactive forms
 
 Utwórz formularz faktury. Formularz powinien zawierać:
-1. Dane wystawcy (nazwa, miasto, adres, kod pocztowy, nip)
+1. Dane wystawcy (nazwa, miasto, adres, kod pocztowy, nip, nr konta bankowego)
 1. Dane zamawiającego (nazwa, miasto, adres, kod pocztowy, nip - nieobowiązkowy)
 1. Nr faktury
 1. Datę wystawienia
