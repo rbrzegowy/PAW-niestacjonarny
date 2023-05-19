@@ -1,0 +1,15 @@
+<h2>Standalone komponent</h2>
+<p>Nawet serwis ma...:)</p>
+<h3>Star Wars API:</h3>
+<button mat-raised-button color="warn" (click)="getData('planeta')">Pobierz planetę</button>
+<button mat-raised-button color="warn" (click)="getData('osoba')">Pobierz postać</button>
+<button mat-raised-button color="warn" (click)="getData('statek')">Pobierz statek</button>
+<div *ngIf="id">Id: {{ id }}</div>
+<div class="data">
+  <div *ngFor="let item of data$ | async | keyvalue">
+    <b>{{ item.key | titlecase }}</b>: {{ item.value }}
+  </div>
+</div>
+<div id="children-outlet">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,160 @@
+<mat-toolbar>
+  <h1>Piaskownica</h1>
+  <div class="submenu">
+    <!-- <button mat-button [routerLink]="['basic']">Podstawy</button> -->
+  </div>
+</mat-toolbar>
+<main>
+  <!-- <mat-card *ngIf="coldHttpPost | async as httpPost}}"> -->
+  <mat-card>
+    <mat-card-title>
+      Pokaż zadania:
+      <!-- {{ httpPost }} -->
+    </mat-card-title>
+    <mat-card-content>
+      <mat-checkbox *ngFor="let task of taskStates | keyvalue" (change)="toggleTask(+task.key, $event.checked)"
+        [checked]="taskStates[+task.key]">
+        Zadanie {{ task.key }}
+      </mat-checkbox>
+    </mat-card-content>
+  </mat-card>
+  <!-- 1 -->
+  <mat-card *ngIf="taskStates[1]">
+    <mat-card-content>
+      <mat-card-title>1. Koordynaty myszy po kliknięciu</mat-card-title>
+      <mat-card-content>
+        Wyemituj koordynaty myszy po kliknięciu w dowolne miejsce na dokumencie.
+        <br>Wykorzystaj fromEvent() na document.click.
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- 2 -->
+  <mat-card *ngIf="taskStates[2]">
+    <mat-card-content>
+      <mat-card-title>2. Koordynaty myszy w interwale</mat-card-title>
+      <mat-card-content>
+        <p>Wyemituj koordynaty kursora nie częściej niż co 1s (jeśli koordynaty się zmieniły).</p>
+        <p>
+          Działa? Zmień na wersję: wyemituj koordynaty jak user nie rusza myszą od 2s i x>500<br>
+          Wykorzystaj sampleTime, debounceTime, filter
+        </p>
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- 3 -->
+  <mat-card *ngIf="taskStates[3]">
+    <mat-card-content>
+      <mat-card-title>3. Głosowanie</mat-card-title>
+      <mat-card-content>
+        <p>
+          Są trzy osoby uprawnione do głosowania ('za'/'przeciw'). Pierwsza oddaje głos po 2s, druga po 3s, trzeci po
+          1s.
+          Zaprezentuj wyniki głosowania gdy wszystkie głosy zostaną oddane.
+        </p>
+        <p>
+          Gotowe? Zmodyfikuj kod by głosy były losowe (pamiętaj by nie duplikować kodu).
+          Wykorzystaj: timer + map lub of + delay oraz jeden z operatorów grupujących.
+        </p>
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- 4 -->
+  <mat-card *ngIf="taskStates[4]">
+    <mat-card-content>
+      <mat-card-title>4. SearchBox </mat-card-title>
+      <mat-card-content>
+        <p>
+          Zapisz się na zdarzenie input pola tekstowego (roboczo - jest to wyszukiwarka). Emituj wpisane wartości gdy
+          użytkownik
+          przerwał wpisywanie na min. 300ms i wartość nie jest pusta.
+        </p>
+        <p>GOTOWE? Rozbuduj kod o zapamiętywanie wyszukiwań usera (historia wyszukiwania).</p>
+        <p>JESZCZE TUTAJ? Zamockuj autozapis. W trakcie zapisu pokaż komunikat "Zapisywanie", następnie
+          przez 2s "Zapisano", następnie datę/czas ostatniego zapisu.</p>
+        <mat-form-field>
+          <input #searchBox matInput placeholder="Szukany produkt" (input)="onSearchChange($event)">
+
+        </mat-form-field>
+        <ng-container *ngIf="searchSaveStatus$ | async as saveStatus">{{
+          saveStatus }}</ng-container>
+        <ng-container *ngIf="formattedHistory$ | async as history">
+          <p>Historia wyszukiwań:</p>
+          <p>{{ history }}</p>
+        </ng-container>
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- 5 -->
+  <mat-card *ngIf="taskStates[5]">
+    <mat-card-content>
+      <mat-card-title>5. Media player </mat-card-title>
+      <mat-card-content>
+        <p>
+          Stwórz media player. Dwa checkboxy "co jest grane" (audio i video) oraz trzy przyciski "toggle audio", "toggle
+          video", "toggle audio/video"
+          W divie poniżej wypisz które media są aktualnie używane.
+        </p>
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- 6 -->
+  <mat-card *ngIf="taskStates[6]">
+    <mat-card-content>
+      <mat-card-title>6. Routing - loader </mat-card-title>
+      <mat-card-content>
+
+        <p>1. Stwórz route /dlugie ladowanie - kieruje do dowolnego komponentu</p>
+        <p>2. Stwórz dla route resolver który odczeka 4s.</p>
+        <p>
+          3. Zaimplementuj loader. Forma dowolna - pasek oczekiwania lub np. komunikat "trwa ładowanie"
+          Loader powinien się odpalać przy starcie nawigacji (zdarzenie NavigationStart),
+          kończyć na zdarzeniu NavigationEnd i/lub NavigationCancel.
+        </p>
+        <p>DZIAŁA? Nie pokazuje loadera gdy ładowanie trwa mniej niż 1s</p>
+        <p>GOTOWE? Dodaj automatyczne zamykanie loader po 30s (aplikacja prawdopodobnie wisi)</p>
+
+        <p>ZADANIE DOMOWE: Zrób serwis loadera dostępny dla każdego komponentu w aplikacji
+          - czyli loader pokazuje się nie na routingu, lecz gdy następuje dowolna długo trwająca akcja (np. ładowanie
+          danych z api)</p>
+        <p>Nudy? Kilka elementów może jednocześnie uruchomić loader. Każdy z nich musi go zamknąć żeby zniknął z
+          ekranu:)</p>
+        <p>Dalej nudy? Wyobraź sobie sytuację - komponent ładuje dane, w międzyczasie user wychodzi z komponentu</p>
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+  <!-- 7 -->
+  <!-- na podstawie przykładu z learnrxjs.io -->
+  <mat-card *ngIf="taskStates[7]">
+    <mat-card-content>
+      <mat-card-title>7. Trwa zapisywanie</mat-card-title>
+      <mat-card-content>
+        <p>
+          Wyświetl informację o zapisywaniu zmian (lub dacie ostatniego zapisu)
+        </p>
+        <mat-form-field>
+          <input #saveInput matInput placeholder="Wpisz dane żeby zapisać">
+        </mat-form-field>
+        <div>{{saveStatus$ | async}}</div>
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="taskStates[8]">
+    <mat-card-content>
+      <mat-card-title>8. Kontrolka waluty</mat-card-title>
+      <mat-card-content>
+        <p>
+          Stwórz kontrolkę która będzie wyświetlała podaną w formControlName liczbę jako walutę.
+        <p>
+          Kontrolka powinna mieć możliwość zdefiniowania symbolu waluty. Wartość wyświetlana z dokładnością do dwóch
+          miejsc po przecinkku.
+        </p>
+        <p>Zaimplementuj CONTROL_VALUE_ACCESSOR</p>
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+</main>

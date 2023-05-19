@@ -1,0 +1,18 @@
+<mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate"></mat-progress-bar>
+<app-header></app-header>
+<mat-card>
+  <mat-card-content>
+    <nav>
+      <button mat-raised-button color="warn" [routerLink]="['rxjs']" routerLinkActive="active">RxJS</button>
+      <button mat-raised-button [routerLink]="['piaskownica']" routerLinkActive="active">Piaskownica</button>
+    </nav>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <!-- /rxjs/hot-cold -->
+    <router-outlet></router-outlet>
+
+  </mat-card-content>
+</mat-card>
+<!-- <app-console></app-console> -->

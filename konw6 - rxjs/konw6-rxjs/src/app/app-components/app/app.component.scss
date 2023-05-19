@@ -1,0 +1,11 @@
+nav button {
+  margin: 5px;
+
+  &.active {
+    background: #0f92b3;
+  }
+}
+
+mat-card {
+  margin: 20px;
+}

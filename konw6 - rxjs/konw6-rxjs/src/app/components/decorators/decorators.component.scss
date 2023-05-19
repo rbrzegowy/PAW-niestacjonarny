@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  transition: 1s ease-in-out;
+}
+
+app-message {
+  margin: 10px;
+}
+
+::ng-deep {
+  app-message ul {
+    font-size: 18px;
+  }
+}

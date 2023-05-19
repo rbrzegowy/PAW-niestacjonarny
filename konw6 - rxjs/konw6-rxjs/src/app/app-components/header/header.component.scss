@@ -1,0 +1,10 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+::ng-deep {
+  .mat-typography h1 {
+    margin-bottom: 0;
+  }
+}

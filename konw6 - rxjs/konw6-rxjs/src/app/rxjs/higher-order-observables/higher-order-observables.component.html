@@ -1,0 +1,90 @@
+<h2>Łączenie strumieni danych</h2>
+<div>
+  Strumieniem zewnętrznym jest Interval 3000. Co 3 sekundy emituje kolejno: strumień ones$, tens$, hundreds$.
+</div>
+<main>
+  <mat-card>
+    <mat-card-content>
+      <mat-card-title>Monitor</mat-card-title>
+      <mat-card-subtitle>Aktualne wartości strumieni</mat-card-subtitle>
+      <mat-card-content>
+        Interval 3000: {{ interval3000$ | async }}<br>
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <mat-card-title>concatAll</mat-card-title>
+      <mat-card-subtitle>
+        Emituje wszystkie wartości z ones$, następnie tens$, następnie hundreds$.
+      </mat-card-subtitle>
+      <mat-card-content>
+        concatAll: {{ concatAll$ | async }}<br>
+        Historia: {{concatAllHistory$ | async}}
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <mat-card-title>mergeAll</mat-card-title>
+      <mat-card-subtitle>
+        Emituje wszystkie wartości ze strumieni wewnętrznych w kolejności emisji.
+      </mat-card-subtitle>
+      <mat-card-content>
+        mergeAll: {{ mergeAll$ | async }}<br>
+        Historia: {{mergeAllHistory$ | async}}
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <mat-card-title>switchAll</mat-card-title>
+      <mat-card-subtitle>
+        Emituje wartości z ones$, po emisji tens$ ignoruje resztę z ones$ itd
+      </mat-card-subtitle>
+      <mat-card-content>
+        switchAll: {{ switchAll$ | async }}<br>
+        Historia: {{switchAllHistory$ | async}}
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <mat-card-title>exhaustAll</mat-card-title>
+      <mat-card-subtitle>
+        Emituje wartości z ones$ do końca, ignoruje tens$ (ponieważ zostało wyemitowane przed zakończeniem ones$),
+        zapisuje się do hundreds$
+      </mat-card-subtitle>
+      <mat-card-content>
+        exhaustAll: {{ exhaustAll$ | async }}<br>
+        Historia: {{exhaustAllHistory$ | async}}
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <mat-card-title>zipAll</mat-card-title>
+      <mat-card-subtitle>
+        Czekaj na zakończenia głównego strumienia. Weź pierwsze wartości, połącz, emituj. Weź drugie emisje, [...]
+      </mat-card-subtitle>
+      <mat-card-content>
+        zipAll: {{ zipAll$ | async }}<br>
+        Historia: {{ zipAllHistory$ | async }}
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <mat-card-title>combineLatestAll</mat-card-title>
+      <mat-card-subtitle>
+        Czekaj na zakończenia głównego strumienia. Dla każdej nowej emisji zwraca zestaw ostatnich wartości z każdego ze
+        strumieni wętrznych.
+      </mat-card-subtitle>
+      <mat-card-content>
+        combineLatestAll: {{ combineLatestAll$ | async }}<br>
+        Historia: {{ combineLatestAllHistory$ | async }}
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+</main>
