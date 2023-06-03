@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { Subject, interval, share, scan, Observable, merge, zip, raceWith, map, zipWith, switchMap, combineLatestWith, tap, forkJoin, pipe, race, combineLatest, from, Subscription, of, takeWhile, takeUntil, exhaustMap, take, noop, concatMap, mergeMap, timeout, timer, fromEvent } from 'rxjs'
+import { Subject, interval, share, scan, Observable, merge, zip, raceWith, map, zipWith, switchMap, combineLatestWith, tap, forkJoin, pipe, race, combineLatest, from, Subscription, of, takeWhile, takeUntil, exhaustMap, take, noop, concatMap, mergeMap, timeout, timer, fromEvent, catchError } from 'rxjs'
 
 
 @Component({
@@ -58,19 +58,22 @@ export class ManyObservablesComponent implements OnInit {
       )
 
 
-    // const convertToNumber = (obs: Observable<string>) => {
-    //   const internalSubject = new Subject<number>()
-    //   obs.subscribe(data => {
-    //     internalSubject.next(+data)
-    //   })
-    //   return internalSubject.asObservable()
-    // }
+    const convertToNumber = (obs: Observable<string>) => {
+      const internalSubject = new Subject<number>()
+      obs
+        .subscribe(data => {
+          internalSubject.next(+data)
+        })
+      return internalSubject.asObservable()
+    }
 
 
     // this.btn1$ = this.btn1.pipe(convertToNumber)
     this.btn1$ = this.btn1.pipe(sumujIWyswietl('btn1'))
     this.btn2$ = this.btn2.pipe(sumujIWyswietl('btn2'))
     this.btn3$ = this.btn3.pipe(sumujIWyswietl('btn3'))
+
+    const subx = this.btn1.subscribe(() => {})
 
     // this.btn1$
     //   .pipe(//...logika)
